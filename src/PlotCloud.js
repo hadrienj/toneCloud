@@ -40,6 +40,7 @@ class PlotCloud {
     this.yAxis.tickSizeOuter([0]);
 
     this.yAxis.ticks(5);
+    this.xAxis.ticks(6);
 
     // Add the X Axis
     svg.append("g")
@@ -57,13 +58,16 @@ class PlotCloud {
     // clean the plot
     d3.selectAll("circle").remove();
 
+    // select 3 seconds to plot
+    const dataSub = data.filter(x=>x.time<3);
+
     // Scale the range of the data
-    this.xScale.domain(d3.extent(data, function(d) { return d.time; }));
-    this.yScale.domain([0, d3.max(data, function(d) { return d.freq; })]);
+    this.xScale.domain(d3.extent(dataSub, function(d) { return d.time; }));
+    this.yScale.domain([0, d3.max(dataSub, function(d) { return d.freq; })]);
 
     // Add the scatterplot
     this.svg.selectAll("dot")
-        .data(data)
+        .data(dataSub)
       .enter().append("circle")
         .attr("r", 3)
         .attr("cx", (d) => { return this.xScale(d.time); })
@@ -78,8 +82,6 @@ class PlotCloud {
     this.svg.select(".yaxis")
       .call(this.yAxis);
 
-    this.xAxis.tickSizeOuter(0);
-
     // we want to keep the context of the click event to get position
     var that = this;
     // Play sound from the x click position
@@ -88,7 +90,7 @@ class PlotCloud {
         xScale: that.xScale,
         xPos: d3.mouse(this)[0]-that.margin.left,
         height: that.height,
-        data,
+        dataSub,
         svg: that.svg,
       });
     });

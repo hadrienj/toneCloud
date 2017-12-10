@@ -12,7 +12,7 @@ class App extends Component {
   constructor(props) {
     super(props);
 
-    this.data = new Data('ens1');
+    this.data = new Data('toneclouddemo');
 
     this.state = {
       docID: 'infMask_1_0_',
@@ -56,9 +56,7 @@ class App extends Component {
   handleRemove(event) {
     this.setState(prevState => ({
       num: prevState.num - 1
-    }));
-    console.log(this.state);
-    this.init();
+    }), () => this.init());
   }
   render() {
     return (
