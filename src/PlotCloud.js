@@ -56,22 +56,23 @@ class PlotCloud {
   }
   drawCloud(data) {
     // clean the plot
-    d3.selectAll("circle").remove();
+    d3.selectAll("rect").remove();
 
     // select 3 seconds to plot
     const dataSub = data.filter(x=>x.time<3);
 
     // Scale the range of the data
-    this.xScale.domain(d3.extent(dataSub, function(d) { return d.time; }));
+    this.xScale.domain([0, d3.max(dataSub, function(d) { return d.time; })]);
     this.yScale.domain([0, d3.max(dataSub, function(d) { return d.freq; })]);
 
     // Add the scatterplot
     this.svg.selectAll("dot")
         .data(dataSub)
-      .enter().append("circle")
-        .attr("r", 3)
-        .attr("cx", (d) => { return this.xScale(d.time); })
-        .attr("cy", (d) => { return this.yScale(d.freq); })
+      .enter().append("rect")
+        .attr("x", (d) => { return this.xScale(d.time); })
+        .attr("y", (d) => { return this.yScale(d.freq); })
+        .attr("width", this.xScale(0.04))
+        .attr("height", 1)
         .style("fill", "#4480bc");
 
     // Update the Axis
@@ -86,14 +87,19 @@ class PlotCloud {
     var that = this;
     // Play sound from the x click position
     d3.select("svg").on("click", function(d, i) {
-      that.player.play({
-        xScale: that.xScale,
-        xPos: d3.mouse(this)[0]-that.margin.left,
-        height: that.height,
-        dataSub,
-        svg: that.svg,
-      });
+      const xPosClick = d3.mouse(this)[0];
+      console.log(xPosClick);
+      that.startPlayer({xPosClick, data: dataSub});
     });
+  }
+  startPlayer({xPosClick, data}) {
+    this.player.play({
+        xScale: this.xScale,
+        xPos: xPosClick-this.margin.left,
+        height: this.height,
+        data: data,
+        svg: this.svg,
+      });
   }
 }
 export default PlotCloud;

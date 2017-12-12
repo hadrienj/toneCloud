@@ -74,6 +74,7 @@ class Player {
     // stop the animation when there is no more tone to play
     if (this.time+passedTime > this.xScale.domain()[1]) {
       cancelAnimationFrame(this.requestId);
+      this.isPlaying = !this.isPlaying;
     }
   }
 }
