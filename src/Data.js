@@ -3,7 +3,7 @@ import PouchDB from 'pouchdb';
 
 class Data {
   constructor(dbName) {
-    this.db = new PouchDB('http://46.101.83.193/'+dbName);
+    this.db = new PouchDB('https://db.auditory.fr:6984/'+dbName);
   }
   get(id) {
     return new Promise((resolve, reject)=> {
