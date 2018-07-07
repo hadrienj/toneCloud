@@ -143,11 +143,10 @@ class Info extends React.Component {
   render() {
     return (
       <div className='info'>
-        Tone clouds can be used in to investigate the
+        Tone clouds can be used to investigate
         auditory selective attention (Gutschalk et al., 2008). Here, you can
-        see and listen to several examples of tone cloud that were used in
-        psychoacoustic experiments. Characteristics of these tones clouds are
-        fetched from a Couch database.
+        see and listen to several examples of tone clouds that have been used in
+        psychoacoustic experiments.
         <div className='infoCenter'>
           Click somewhere on the plot to listen to the tone cloud.
         </div>
