@@ -3,10 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "bootstrap": "3",
     "d3": "^4.10.0",
     "pouchdb": "^6.3.4",
     "react": "^15.6.1",
+    "react-bootstrap": "^0.32.1",
     "react-dom": "^15.6.1",
+    "react-flexbox-grid": "^2.1.2",
     "react-scripts": "1.0.10"
   },
   "scripts": {
@@ -14,9 +17,9 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "deploy" : "npm run build&&gh-pages -d build"
+    "deploy": "npm run build&&gh-pages -d build"
   },
-  "homepage": "https://hadrienj.github.io/toneCloud",
+  "homepage": "http://tonecloud.auditory.fr",
   "devDependencies": {
     "gh-pages": "^1.1.0"
   }

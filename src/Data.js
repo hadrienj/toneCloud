@@ -2,8 +2,8 @@ import PouchDB from 'pouchdb';
 
 
 class Data {
-  constructor(dbName) {
-    this.db = new PouchDB('https://db.auditory.fr:6984/'+dbName);
+  constructor({dbName}) {
+    this.db = new PouchDB(`https://db.auditory.fr:6984/${dbName}`);
   }
   get(id) {
     return new Promise((resolve, reject)=> {

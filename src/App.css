@@ -1,3 +1,8 @@
+body {
+  font-family: Avenir Next!important;
+  font-size: 12pt!important;
+}
+
 .App {
   text-align: center;
 }
@@ -32,4 +37,33 @@
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
+}
+
+.navbar-brand {
+  color: white!important;
+}
+.navbar-inverse {
+  background-color: #343a40!important;
+}
+.info {
+  margin: 2em 25%;
+  text-align: justify;
+}
+.infoCenter {
+  text-align: center;
+  font-weight: bold;
+}
+#svg-container {
+  display: inline-block;
+  position: relative;
+  width: 100%;
+  padding-bottom: 100%;
+  vertical-align: top;
+  overflow: hidden;
+}
+.svg-content {
+  display: inline-block;
+    position: absolute;
+    top: 0;
+    left: 0;
 }

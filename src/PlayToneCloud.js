@@ -1,4 +1,5 @@
-import { cosSquared } from './ramps';
+import {
+ cosSquared } from './ramps';
 
 
 class PlayToneCloud {
@@ -19,12 +20,10 @@ class PlayToneCloud {
   }
   play({toneCloud, time}) {
     this.masterGain.gain.value = 0.5;
-
     this.startOscillators(toneCloud);
   }
   startOscillators(obj) {
     this.sources = [];
-
     // time base is removed to start the tonecloud at 0
     const timeBase = Math.min.apply(null, obj.map(x => x.time));
 
@@ -57,7 +56,6 @@ class PlayToneCloud {
   stop() {
     this.masterGain.gain.value = 0;
     // disconnect oscillators to free up memory
-    console.log(this.sources.length);
     for (var i of this.sources) {
       i.osc.stop();
       i.osc.disconnect();

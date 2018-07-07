@@ -11,7 +11,6 @@ class PlotCloud {
     this.player = new Player();
   }
   init(docs) {
-    console.log(docs);
     this.docs = docs;
     var data = this.docs.toneCloudParam;
     this.drawCloud(data);
@@ -20,9 +19,10 @@ class PlotCloud {
     // append the svg obgect to the body of the page
     // appends a 'group' element to 'svg'
     // moves the 'group' element to the top left margin
-    var svg = d3.select("body").append("svg")
-      .attr("width", this.width + this.margin.left + this.margin.right)
-      .attr("height", this.height + this.margin.top + this.margin.bottom)
+    var svg = d3.select("#svg-container").append("svg")
+      .attr("preserveAspectRatio", "xMinYMin meet")
+      .attr("viewBox", "0 0 1000 1000")
+      .classed("svg-content", true)
     .append("g")
       .attr("transform",
         "translate(" + this.margin.left + "," + this.margin.top + ")");
@@ -59,7 +59,7 @@ class PlotCloud {
     d3.selectAll("rect").remove();
 
     // select 3 seconds to plot
-    const dataSub = data.filter(x=>x.time<3);
+    const dataSub = data.filter(x=>x.time<2);
 
     // Scale the range of the data
     this.xScale.domain([0, d3.max(dataSub, function(d) { return d.time; })]);
@@ -74,7 +74,6 @@ class PlotCloud {
         .attr("width", this.xScale(0.04))
         .attr("height", 1)
         .style("fill", "#4480bc");
-
     // Update the Axis
     this.xAxis.scale(this.xScale);
     this.yAxis.scale(this.yScale);
@@ -87,8 +86,8 @@ class PlotCloud {
     var that = this;
     // Play sound from the x click position
     d3.select("svg").on("click", function(d, i) {
+
       const xPosClick = d3.mouse(this)[0];
-      console.log(xPosClick);
       that.startPlayer({xPosClick, data: dataSub});
     });
   }
